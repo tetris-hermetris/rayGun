@@ -3,14 +3,14 @@ import math, times, strformat
 when isMainModule:
   
   let start = now()
-  # let LUT = [ (0.0, 0.0, 0.0),
-  #             (0.0, 0.0, 1.0),
-  #             (0.0, 1.0, 0.0),
-  #             (0.0, 1.0, 1.0),
-  #             (1.0, 0.0, 0.0),
-  #             (1.0, 0.0, 1.0),
-  #             (1.0, 1.0, 0.0),
-  #             (1.0, 1.0, 1.0)]
+  let LUT = [ (0.0, 0.0, 0.0),
+              (0.0, 0.0, 1.0),
+              (0.0, 1.0, 0.0),
+              (0.0, 1.0, 1.0),
+              (1.0, 0.0, 0.0),
+              (1.0, 0.0, 1.0),
+              (1.0, 1.0, 0.0),
+              (1.0, 1.0, 1.0)]
 
   # let LUT = [ (0.0, 0.0, 0.0),
   #             (0.0, 0.0, 0.5),
@@ -27,6 +27,10 @@ when isMainModule:
   #             (1.0, 1.0, 0.0),
   #             (0.5, 0.5, 0.5),
   #             (1.0, 1.0, 1.0)]
+  
+  # let LUT: seq
+
+  
 
   let W, H = 1333
 
@@ -52,7 +56,7 @@ when isMainModule:
 
   for x in 0..W-1:
     for y in 0..H-1:
-      img.setPixel(x, y, LUT[((sin(x.toFloat * 0.1)+2)*(cos(y.toFloat * 0.03)+2)).toInt mod LUT.len])
+      img.setPixel(x, y, LUT[((sin(x.toFloat * 0.005)+2)*(cos(y.toFloat * 0.005)+2)).toInt mod LUT.len])
   
   # for v in 0..W:
   #   img.setPixel(v, v, LUT[LUT.high])
