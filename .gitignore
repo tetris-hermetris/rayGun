@@ -1,7 +1,11 @@
+*
+!**/
+!*.*
 nimcache/
 nimblecache/
 htmldocs/
 .vscode/
 output/*
 dev-docs/
+playground/
 .DS_Store
