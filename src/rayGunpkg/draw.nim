@@ -125,3 +125,21 @@ proc circle*(clip: var Clip, c: (int, int), r: int, value: seq[float64], kind: C
     inc f, ddFX + 1
  
     clip.setPixel8(c[0], c[1], x, y, value, kind)
+
+proc drawCubicBezier*(clip: var Clip; p1, p2, p3, p4: (int, int); value: seq[float64], kind: ClipKind = rgb, nseg: Positive = 1000) =
+ 
+  var points = newSeq[(int, int)](nseg + 1)
+ 
+  for i in 0..nseg:
+    let t = i / nseg
+    let u = (1 - t) * (1 - t)
+    let a = (1 - t) * u
+    let b = 3 * t * u
+    let c = 3 * (t * t) * (1 - t)
+    let d = t * t * t
+ 
+    points[i] = (x: (a * p1[0].toFloat + b * p2[0].toFloat + c * p3[0].toFloat + d * p4[0].toFloat).toInt,
+                 y: (a * p1[1].toFloat + b * p2[1].toFloat + c * p3[1].toFloat + d * p4[1].toFloat).toInt)
+ 
+  for i in 1..points.high:
+    clip.line(points[i - 1], points[i], value, kind)
